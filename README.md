@@ -10,7 +10,7 @@ tasks, etc), and turned on or off based on any logic.
 The logic for detecting duplicate queries and finding long running queries, as well as the 
 structure of the project and even this readme, are all inspired by (and in many cases copied over) 
 from Django Query Inspector (which unfortunately only works as a middleware, which was not what I needed), 
-which can be found here: (https://github.com/dobarkod/django-queryinspect)
+which can be found [here](https://github.com/dobarkod/django-queryinspect).
 
 Works with Django (1.4, 1.5, 1.6, 1.7, 1.8, 1.9) and Python (2.7, 3.3, 3.4, 3.5).
 
