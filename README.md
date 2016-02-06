@@ -3,14 +3,14 @@
 [![Build Status](https://travis-ci.org/4word/django-query-logger.svg?branch=master)](https://travis-ci.org/dobarkod/django-query-logger?branch=master)
 
 Query Logger is a Django mixin class for logging duplicate or slow queries, query execution time, 
-and total execution time. its useful for debugging specific areas of your code, and since its a
+and total execution time. It's useful for debugging specific areas of your code, and since its a
 mixin, it can be added to any class (class based views, django rest framework serializers, celery
 tasks, etc), and turned on or off based on any logic.
 
 The logic for detecting duplicate queries and finding long running queries, as well as the 
 structure of the project and even this readme, are all inspired by (and in many cases copied over) 
-from Django Query Inspector, which can be found here: 
-https://github.com/dobarkod/django-queryinspect
+from Django Query Inspector (which unfortunately only works as a middleware, which was not what I needed), 
+which can be found here: (https://github.com/dobarkod/django-queryinspect)
 
 Works with Django (1.4, 1.5, 1.6, 1.7, 1.8, 1.9) and Python (2.7, 3.3, 3.4, 3.5).
 
@@ -133,6 +133,7 @@ defaults if there is a missing config option.
         'log_tracebacks': False  # Include the tracebacks for all the queries
         'log_long_running_time': 1000  # Log long running time for this many milliseconds
     }
+    self.start_query_logger(configuration_dict)
 
 ## Testing
 
@@ -150,6 +151,7 @@ For available test environments refer to `tox.ini` file.
 ## License
 
 Copyright (C) 2016. Shopventory Inc and Django Query Logger contributors
+
 Copyright (C) 2014.-2015. Good Code and Django Query Inspector contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
