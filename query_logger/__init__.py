@@ -1,1 +1,1 @@
-from mixin import DatabaseQueryLoggerMixin
+from .mixin import DatabaseQueryLoggerMixin
