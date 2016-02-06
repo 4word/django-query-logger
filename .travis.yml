@@ -1,0 +1,37 @@
+language: python
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+addons:
+  apt:
+    sources:
+      - deadsnakes
+    packages:
+      - python3.5
+
+env:
+  - TOX_ENV=py27-django14
+  - TOX_ENV=py27-django15
+  - TOX_ENV=py27-django16
+  - TOX_ENV=py27-django17
+  - TOX_ENV=py27-django18
+  - TOX_ENV=py27-django19
+  - TOX_ENV=py33-django15
+  - TOX_ENV=py33-django16
+  - TOX_ENV=py33-django17
+  - TOX_ENV=py33-django18
+  - TOX_ENV=py34-django15
+  - TOX_ENV=py34-django16
+  - TOX_ENV=py34-django17
+  - TOX_ENV=py34-django18
+  - TOX_ENV=py34-django19
+  - TOX_ENV=py35-django18
+  - TOX_ENV=py35-django19
+
+script:
+  - pip install tox
+  - tox -e $TOX_ENV
