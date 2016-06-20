@@ -27,7 +27,7 @@ class TestCommand(BaseCommand):
 
 setup(
     name='django-query-logger',
-    version='0.1.0',
+    version='0.1.1',
     author='Titus Peterson',
     description='A mixin for logging and debugging Django queries',
     license='MIT',
