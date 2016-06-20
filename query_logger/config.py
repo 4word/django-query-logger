@@ -19,6 +19,8 @@ class DatabaseQueryLoggerMixinConfig(object):
         self.log_long_running_time = kwargs.get('log_long_running_time',
                                                 getattr(settings, 'LOG_QUERY_TIME_ABSOLUTE_LIMIT', 1000))
 
+        self.logging_extras = kwargs.get('logging_extra_dict', {})
+
         # This is for internal testing only. If you add unit tests yourself for the query debbuging mixin, then you can
         # define a settings.TESTING variable that is True when unit tests are running.
         self.testing = getattr(settings, 'TESTING', False)

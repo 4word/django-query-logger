@@ -231,19 +231,24 @@ class DatabaseQueryLoggerMixin(object):
         sql_time = sum(qi.time for qi in infos)
         n = len(infos)
 
+        extra = {
+            'class_name': self.__class__.__name__,
+            'num': num_duplicates,
+            'sqltime': sql_time,
+            'totaltime': total_time,
+            'logtype': 'querylog__summary'
+        }
+
+        for k in self.query_debug_cfg.logging_extras.keys():
+            extra[k] = self.query_debug_cfg.logging_extras[k]
+
         logger.info(
             '[SQL] %d queries (%d duplicates), %d ms SQL time, %d ms total processing time' % (
                 n,
                 num_duplicates,
                 sql_time * 1000,
                 total_time * 1000),
-            extra={
-                'class_name': self.__class__.__name__,
-                'num': num_duplicates,
-                'sqltime': sql_time,
-                'totaltime': total_time,
-                'logtype': 'querylog__summary'
-            }
+            extra=extra
         )
 
     def start_query_logging(self, config_opts=None):
