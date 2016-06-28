@@ -1,6 +1,6 @@
 # Django Query Logger
 
-[![Build Status](https://travis-ci.org/4word/django-query-logger.svg?branch=master)](https://travis-ci.org/dobarkod/django-query-logger?branch=master)
+[![Build Status](https://travis-ci.org/4word/django-query-logger.svg?branch=master)](https://travis-ci.org/4word/django-query-logger?branch=master)
 
 Query Logger is a Django mixin class for logging duplicate or slow queries, query execution time, 
 and total execution time. It's useful for debugging specific areas of your code, and since its a
