@@ -175,18 +175,24 @@ class DatabaseQueryLoggerMixin(object):
         if log_duplicates:
             for sql, num in duplicates:
                 if log_tracebacks and dup_groups[sql]:
+                    extra = {'traceback': ''.join(traceback.format_list(dup_groups[sql][0].tb)),
+                             'num': num,
+                             'sql': sql,
+                             'class_name': self.__class__.__name__,
+                             'logtype': 'querylog__duplicate'}
+                    for k in self.query_debug_cfg.logging_extras.keys():
+                        extra[k] = self.query_debug_cfg.logging_extras[k]
                     logger.warning('[SQL] repeated query (%dx): %s' % (num, sql),
-                                   extra={'traceback': ''.join(traceback.format_list(dup_groups[sql][0].tb)),
-                                          'num': num,
-                                          'sql': sql,
-                                          'class_name': self.__class__.__name__,
-                                          'logtype': 'querylog__duplicate'})
+                                   extra=extra)
                 else:
+                    extra = {'num': num,
+                             'sql': sql,
+                             'class_name': self.__class__.__name__,
+                             'logtype': 'querylog__duplicate'}
+                    for k in self.query_debug_cfg.logging_extras.keys():
+                        extra[k] = self.query_debug_cfg.logging_extras[k]
                     logger.warning('[SQL] repeated query (%dx): %s' % (num, sql),
-                                   extra={'num': num,
-                                          'sql': sql,
-                                          'class_name': self.__class__.__name__,
-                                          'logtype': 'querylog__duplicate'})
+                                   extra=extra)
         return n
 
     def check_absolute_limit(self, infos, log_long_running_time):
@@ -202,22 +208,27 @@ class DatabaseQueryLoggerMixin(object):
         if not log_long_running_time or n == 0:
             return
         elif log_long_running_time > 0:
+
             query_limit = log_long_running_time / 1000.0
 
             for qi in infos:
                 if qi.time > query_limit:
+                    extra = {
+                        'class_name': self.__class__.__name__,
+                        'time': qi.time * 1000,
+                        'limit': query_limit * 1000,
+                        'sql': qi.sql,
+                        'logtype': 'querylog__longrunning'
+                    }
+                    for k in self.query_debug_cfg.logging_extras.keys():
+                        extra[k] = self.query_debug_cfg.logging_extras[k]
                     logger.warning('[SQL] query execution of %d ms over absolute '
                                    'limit of %d ms: %s' % (
                                        qi.time * 1000,
                                        query_limit * 1000,
                                        qi.sql),
-                                   extra={
-                                       'class_name': self.__class__.__name__,
-                                       'time': qi.time * 1000,
-                                       'limit': query_limit * 1000,
-                                       'sql': qi.sql,
-                                       'logtype': 'querylog__longrunning'
-                                   })
+                                   extra=extra
+                                   )
 
     def output_stats(self, infos, num_duplicates, total_time):
         """
