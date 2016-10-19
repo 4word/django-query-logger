@@ -113,7 +113,7 @@ The behaviour of Django Query Logger can be fine-tuned via the following
 settings variables:
 
     LOG_QUERY_DATABASE_CONNECTION = 'default'  # Change this if you want to log from a different db connection
-    LOG QUERY_DUPLICATE_QUERIES = True  # Turn this off if you dont want to see duplicate query logs
+    LOG_QUERY_DUPLICATE_QUERIES = True  # Turn this off if you dont want to see duplicate query logs
     LOG_QUERY_TRACEBACKS = False  # Include the traceback in your query logs. Useful if your not sure where 
                                   # queries are coming from. Caution: turning this on everywhere can be a 
                                   # performance issue
