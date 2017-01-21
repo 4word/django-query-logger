@@ -128,10 +128,10 @@ to the start_query_logging() function. Note: not all of these have to be defined
 defaults if there is a missing config option.
 
     configuration_dict = {
-        'connection_name': 'default'  # The name of the db connection to log
-        'log_duplicate_queries': True  # Log the duplicate SQL queries
-        'log_tracebacks': False  # Include the tracebacks for all the queries
-        'log_long_running_time': 1000  # Log long running time for this many milliseconds
+        'connection_name': 'default',  # The name of the db connection to log
+        'log_duplicate_queries': True,  # Log the duplicate SQL queries
+        'log_tracebacks': False,  # Include the tracebacks for all the queries
+        'log_long_running_time': 1000,  # Log long running time for this many milliseconds
     }
     self.start_query_logger(configuration_dict)
 
